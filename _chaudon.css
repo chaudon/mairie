@@ -1,0 +1,80 @@
+/* ═══════════════════════════════════════════════
+   Mairie de Chaudon — feuille de style commune
+   Toutes les pages du site partagent ce fichier.
+   ═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bleu:#1a3a7c;--bleu-c:#2655b0;--bleu-f:#0d2155;
+  --or:#d4a017;--or-c:#f0c040;--or-f:#9a7010;
+  --blanc:#f5f3ee;--gris:#e8e4dc;--texte:#1a1a1a;--texte-s:#555;
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--blanc);color:var(--texte);min-height:100vh}
+
+/* ── HEADER ── */
+header{background:var(--bleu-f);color:white;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.35)}
+.header-top{display:flex;align-items:center;gap:1rem;padding:.6rem 2rem;border-bottom:2px solid var(--or)}
+.header-logo{height:52px;width:auto;flex-shrink:0}
+.header-titles{flex:1;min-width:0}
+.header-titles h1{font-family:'Cinzel',serif;font-size:clamp(1rem,2.5vw,1.5rem);font-weight:700;letter-spacing:.06em;color:var(--or-c);line-height:1.15}
+.header-titles span{font-size:.8rem;color:rgba(255,255,255,.65);letter-spacing:.12em;text-transform:uppercase;font-family:'Source Serif 4',serif;font-style:italic}
+
+/* ── NAV ── */
+nav{background:var(--bleu);position:relative}
+.nav-inner{display:flex;align-items:stretch;max-width:1400px;margin:0 auto}
+.hamburger{display:none;background:none;border:none;color:white;padding:.75rem 1.25rem;cursor:pointer;align-items:center;gap:.5rem;font-family:'Source Serif 4',serif}
+.hamburger span{font-size:.85rem}
+.nav-menu{display:flex;list-style:none;flex:1;flex-wrap:wrap}
+.nav-menu>li{position:relative}
+.nav-menu>li>a{display:flex;align-items:center;gap:.3rem;padding:0 1.1rem;height:var(--nav-h);color:rgba(255,255,255,.88);text-decoration:none;font-size:.82rem;font-family:'Source Serif 4',serif;white-space:nowrap;transition:background .18s,color .18s;border-bottom:3px solid transparent}
+.nav-menu>li>a:hover,.nav-menu>li>a.active{background:rgba(255,255,255,.1);color:var(--or-c);border-bottom-color:var(--or)}
+.nav-menu>li>a::after{content:'▾';font-size:.65rem;opacity:.6;margin-left:.2rem}
+.nav-menu>li>a.no-arrow::after{display:none}
+.dropdown{display:none;position:absolute;top:100%;left:0;background:var(--bleu-f);min-width:220px;border-top:2px solid var(--or);box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:999;list-style:none}
+.nav-menu>li:hover>.dropdown{display:block}
+.dropdown li{position:relative}
+.dropdown a{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.1rem;color:rgba(255,255,255,.82);text-decoration:none;font-size:.8rem;font-family:'Source Serif 4',serif;transition:background .15s,color .15s;border-left:3px solid transparent}
+.dropdown a:hover{background:rgba(255,255,255,.1);color:var(--or-c);border-left-color:var(--or)}
+.sub-arrow{font-size:.6rem;opacity:.6}
+.sub-dropdown{display:none;position:absolute;left:100%;top:0;background:var(--bleu-f);min-width:200px;border-top:2px solid var(--or);box-shadow:4px 8px 24px rgba(0,0,0,.35);list-style:none;z-index:1000}
+.dropdown li:hover>.sub-dropdown{display:block}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .hamburger{display:flex}
+  .nav-menu{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--bleu-f);z-index:998;max-height:80vh;overflow-y:auto;border-top:2px solid var(--or)}
+  .nav-menu.open{display:flex}
+  .nav-menu>li>a{height:auto;padding:.85rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.1);border-left:3px solid transparent}
+  .nav-menu>li>a:hover{border-left-color:var(--or);border-bottom-color:rgba(255,255,255,.1)}
+  .dropdown{position:static;display:none;box-shadow:none;border-top:none;background:rgba(0,0,0,.2)}
+  .nav-menu>li.mob-open>.dropdown{display:block}
+  .sub-dropdown{position:static;display:none;background:rgba(0,0,0,.25);border-top:none}
+  .dropdown li.mob-open>.sub-dropdown{display:block}
+  .dropdown a{padding:.6rem 1.8rem;font-size:.78rem}
+  .sub-dropdown a{padding:.55rem 2.4rem;font-size:.75rem}
+}
+
+/* ── FIL D'ARIANE ── */
+.breadcrumb{background:rgba(26,58,124,.06);border-bottom:1px solid var(--gris);padding:.5rem 2rem;font-size:.78rem;color:var(--texte-s)}
+.breadcrumb a{color:var(--bleu-c);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+
+/* ── CONTENU ── */
+.page-wrap{max-width:1350px;margin:0 auto;padding:1.5rem 1.5rem 3rem}
+.page-content{background:white;border-radius:10px;border:1px solid var(--gris);padding:1.5rem 2rem}
+.page-content table{max-width:100%;border-collapse:collapse}
+.page-content img{max-width:100%;height:auto;display:block}
+.page-content a{color:var(--bleu-c)}
+.page-content a:hover{text-decoration:underline}
+.page-title{font-family:'Cinzel',serif;font-size:clamp(1.1rem,3vw,1.7rem);color:var(--bleu-f);border-bottom:2px solid var(--or);padding-bottom:.5rem;margin-bottom:1.25rem;letter-spacing:.04em}
+
+/* Galeries d'images legacy (bulletins, manifestations) */
+.page-content table td{padding:6px}
+.page-content table td img{border-radius:4px;transition:opacity .18s}
+.page-content table td img:hover{opacity:.85}
+
+/* ── FOOTER ── */
+footer{background:var(--bleu-f);color:rgba(255,255,255,.65);text-align:center;padding:1.5rem 2rem;font-size:.78rem;border-top:2px solid var(--or);margin-top:2rem;font-style:italic}
+footer a{color:var(--or-c);text-decoration:none}
+footer a:hover{text-decoration:underline}
