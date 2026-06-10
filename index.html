@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commune de Chaudon — Eure-et-Loir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bleu:    #1a3a7c;
+    --bleu-c:  #2655b0;
+    --bleu-f:  #0d2155;
+    --or:      #d4a017;
+    --or-c:    #f0c040;
+    --or-f:    #9a7010;
+    --blanc:   #f5f3ee;
+    --gris:    #e8e4dc;
+    --texte:   #1a1a1a;
+    --texte-s: #555;
+    --nav-h:   68px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--blanc);
+    color: var(--texte);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--bleu-f);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .6rem 2rem;
+    border-bottom: 2px solid var(--or);
+  }
+
+  .header-logo {
+    height: 52px;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .header-titles {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .header-titles h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--or-c);
+    line-height: 1.15;
+  }
+
+  .header-titles span {
+    font-size: .8rem;
+    color: rgba(255,255,255,.65);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+  }
+
+  .header-date {
+    text-align: right;
+    font-size: .78rem;
+    color: rgba(255,255,255,.65);
+    line-height: 1.6;
+    flex-shrink: 0;
+    display: none;
+  }
+
+  @media (min-width: 640px) { .header-date { display: block; } }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--bleu);
+    position: relative;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: stretch;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    padding: .75rem 1.25rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    align-items: center;
+    gap: .5rem;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .hamburger span { font-size: .85rem; }
+
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  .nav-menu > li {
+    position: relative;
+  }
+
+  .nav-menu > li > a {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    padding: 0 1.1rem;
+    height: var(--nav-h);
+    color: rgba(255,255,255,.88);
+    text-decoration: none;
+    font-size: .82rem;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+    letter-spacing: .03em;
+    white-space: nowrap;
+    transition: background .18s, color .18s;
+    border-bottom: 3px solid transparent;
+  }
+
+  .nav-menu > li > a:hover,
+  .nav-menu > li > a.active {
+    background: rgba(255,255,255,.1);
+    color: var(--or-c);
+    border-bottom-color: var(--or);
+  }
+
+  .nav-menu > li > a::after {
+    content: '▾';
+    font-size: .65rem;
+    opacity: .6;
+    margin-left: .2rem;
+  }
+
+  .nav-menu > li > a.no-arrow::after { display: none; }
+
+  /* Dropdowns */
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bleu-f);
+    min-width: 220px;
+    border-top: 2px solid var(--or);
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    z-index: 999;
+    list-style: none;
+  }
+
+  .nav-menu > li:hover > .dropdown { display: block; }
+
+  .dropdown li { position: relative; }
+
+  .dropdown a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .65rem 1.1rem;
+    color: rgba(255,255,255,.82);
+    text-decoration: none;
+    font-size: .8rem;
+    font-family: 'Source Serif 4', serif;
+    transition: background .15s, color .15s;
+    border-left: 3px solid transparent;
+  }
+
+  .dropdown a:hover {
+    background: rgba(255,255,255,.1);
+    color: var(--or-c);
+    border-left-color: var(--or);
+  }
+
+  .dropdown .sub-arrow { font-size: .6rem; opacity: .6; }
+
+  /* Sub-dropdowns */
+  .sub-dropdown {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: var(--bleu-f);
+    min-width: 200px;
+    border-top: 2px solid var(--or);
+    box-shadow: 4px 8px 24px rgba(0,0,0,.35);
+    list-style: none;
+    z-index: 1000;
+  }
+
+  .dropdown li:hover > .sub-dropdown { display: block; }
+
+  /* Mobile nav */
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bleu-f);
+      z-index: 998;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-top: 2px solid var(--or);
+    }
+
+    .nav-menu.open { display: flex; }
+
+    .nav-menu > li > a {
+      height: auto;
+      padding: .85rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      border-left: 3px solid transparent;
+    }
+
+    .nav-menu > li > a:hover { border-left-color: var(--or); border-bottom-color: rgba(255,255,255,.1); }
+
+    .dropdown {
+      position: static;
+      display: none;
+      box-shadow: none;
+      border-top: none;
+      background: rgba(0,0,0,.2);
+    }
+
+    .nav-menu > li.mob-open > .dropdown { display: block; }
+
+    .sub-dropdown {
+      position: static;
+      display: none;
+      background: rgba(0,0,0,.25);
+      border-top: none;
+    }
+
+    .dropdown li.mob-open > .sub-dropdown { display: block; }
+
+    .dropdown a { padding: .6rem 1.8rem; font-size: .78rem; }
+    .sub-dropdown a { padding: .55rem 2.4rem; font-size: .75rem; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--bleu-f) 0%, var(--bleu) 55%, #2a5090 100%);
+    color: white;
+    padding: 3.5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(212,160,23,.04) 0px,
+      rgba(212,160,23,.04) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+  }
+
+  .hero-content { position: relative; max-width: 720px; margin: 0 auto; }
+
+  .hero h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    font-weight: 600;
+    color: var(--or-c);
+    letter-spacing: .08em;
+    margin-bottom: .6rem;
+  }
+
+  .hero-desc {
+    font-size: clamp(.9rem, 2vw, 1.05rem);
+    color: rgba(255,255,255,.8);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(255,255,255,.1);
+    border: 1px solid var(--or);
+    border-radius: 2rem;
+    padding: .4rem 1.2rem;
+    font-size: .82rem;
+    color: var(--or-c);
+    font-family: 'Cinzel', serif;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main-grid {
+    max-width: 1350px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 270px 1fr 300px;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 1100px) {
+    .main-grid { grid-template-columns: 1fr 280px; }
+    .col-left { order: 3; grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 700px) {
+    .main-grid { grid-template-columns: 1fr; padding: 1rem; gap: 1rem; }
+    .col-left, .col-right { grid-column: 1; order: unset; }
+  }
+
+  /* ── COL LEFT — Actualités ── */
+  .col-left {}
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: .75rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--or-f);
+    border-bottom: 2px solid var(--or);
+    padding-bottom: .4rem;
+    margin-bottom: 1rem;
+  }
+
+  .affiches-grid {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .affiche-card {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    background: white;
+    border: 1px solid var(--gris);
+    border-radius: 8px;
+    padding: .6rem .75rem;
+    text-decoration: none;
+    color: var(--texte);
+    transition: box-shadow .18s, border-color .18s;
+  }
+
+  .affiche-card:hover {
+    box-shadow: 0 3px 12px rgba(26,58,124,.15);
+    border-color: var(--bleu-c);
+  }
+
+  .affiche-thumb {
+    width: 56px;
+    height: 78px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background: var(--gris);
+  }
+
+  .affiche-info strong {
+    display: block;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--bleu);
+    margin-bottom: .2rem;
+    line-height: 1.3;
+  }
+
+  .affiche-info span {
+    font-size: .75rem;
+    color: var(--texte-s);
+    font-style: italic;
+  }
+
+  /* ── COL CENTER ── */
+  .col-center {}
+
+  /* Bienvenue */
+  .bienvenue-box {
+    background: white;
+    border: 1px solid var(--gris);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .bienvenue-msg {
+    font-size: 1rem;
+    color: var(--bleu);
+    font-style: italic;
+    margin-bottom: .5rem;
+  }
+
+  .horloge {
+    display: inline-block;
+    background: var(--bleu-f);
+    color: var(--or-c);
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    letter-spacing: .12em;
+    padding: .3rem 1.2rem;
+    border-radius: 6px;
+    min-width: 130px;
+  }
+
+  /* Présentation commune */
+  .commune-box {
+    background: #fffaf0;
+    border: 1px solid #e8d8a0;
+    border-left: 4px solid var(--or);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-size: .9rem;
+    line-height: 1.75;
+    color: var(--texte);
+    margin-bottom: 1.25rem;
+  }
+
+  .commune-box a {
+    color: var(--bleu-c);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .commune-box a:hover { text-decoration: underline; }
+
+  /* Photo mairie + bulletin */
+  .mairie-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  @media (max-width: 480px) { .mairie-row { grid-template-columns: 1fr; } }
+
+  .mairie-photo {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--gris);
+    display: block;
+  }
+
+  .mairie-photo-link { display: block; }
+  .mairie-photo-link:hover .mairie-photo { opacity: .92; }
+
+  .bulletin-thumb {
+    width: 140px;
+    border-radius: 6px;
+    border: 1px solid var(--gris);
+    display: block;
+    transition: box-shadow .18s;
+  }
+
+  .bulletin-thumb:hover { box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+
+  @media (max-width: 480px) { .bulletin-thumb { width: 100%; } }
+
+  /* ── COL RIGHT ── */
+  .col-right {}
+
+  .map-wrap {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gris);
+    margin-bottom: 1rem;
+  }
+
+  .map-wrap iframe {
+    display: block;
+    width: 100%;
+    border: none;
+  }
+
+  .carte-commune {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--gris);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .social-block {
+    background: white;
+    border: 1px solid var(--gris);
+    border-radius: 8px;
+    padding: .85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    text-decoration: none;
+    color: var(--texte);
+    transition: border-color .18s, box-shadow .18s;
+  }
+
+  .social-block:hover {
+    border-color: #1877f2;
+    box-shadow: 0 2px 10px rgba(24,119,242,.15);
+  }
+
+  .fb-icon {
+    width: 38px;
+    height: 38px;
+    background: #1877f2;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .fb-icon svg { width: 22px; height: 22px; fill: white; }
+
+  .social-text strong { display: block; font-size: .88rem; color: var(--bleu); }
+  .social-text span { font-size: .75rem; color: var(--texte-s); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bleu-f);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-size: .78rem;
+    border-top: 2px solid var(--or);
+    margin-top: 2rem;
+    font-style: italic;
+  }
+
+  footer a { color: var(--or-c); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="header-top">
+    <img src="images/logo-mairie-chaudon.png" alt="Armoiries de Chaudon" class="header-logo">
+    <div class="header-titles">
+      <h1>Commune de Chaudon</h1>
+      <span>Eure-et-Loir · 28210</span>
+    </div>
+    <div class="header-date" id="hdr-date"></div>
+  </div>
+
+  <!-- ══ NAV ══ -->
+  <nav aria-label="Navigation principale">
+    <div class="nav-inner">
+      <button class="hamburger" id="ham-btn" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="0" y1="2" x2="22" y2="2"/><line x1="0" y1="8" x2="22" y2="8"/><line x1="0" y1="14" x2="22" y2="14"/></svg>
+        <span>Menu</span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu" role="menubar">
+
+        <li role="none">
+          <a href="index.html" class="no-arrow active" role="menuitem">Accueil</a>
+        </li>
+
+        <li role="none">
+          <a href="#" role="menuitem">La commune de Chaudon</a>
+          <ul class="dropdown" role="menu" aria-label="La commune de Chaudon">
+            <li><a href="1011.html" role="menuitem">Plan de Chaudon</a></li>
+            <li><a href="Geographie.html" role="menuitem">Géographie</a></li>
+            <li role="none">
+              <a href="#" role="menuitem">Histoire <span class="sub-arrow">›</span></a>
+              <ul class="sub-dropdown" role="menu" aria-label="Histoire">
+                <li><a href="Histoire .html" role="menuitem">Chaudon Origine</a></li>
+                <li><a href="siecle.html" role="menuitem">Histoire d'un siècle</a></li>
+                <li><a href="Maires de Chaudon.pdf" role="menuitem">Les Maires de Chaudon</a></li>
+              </ul>
+            </li>
+            <li><a href="Patrimoine .html" role="menuitem">Patrimoine</a></li>
+            <li><a href="cassegrain .html" role="menuitem">Laurent Cassegrain</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" role="menuitem">La Mairie</a>
+          <ul class="dropdown" role="menu" aria-label="La Mairie">
+            <li><a href="La Mairie.html" role="menuitem">Le Conseil Municipal</a></li>
+            <li><a href="conseil municipal.html" role="menuitem">Compte rendu Conseil Municipal</a></li>
+            <li role="none">
+              <a href="#" role="menuitem">Urbanisme <span class="sub-arrow">›</span></a>
+              <ul class="sub-dropdown" role="menu" aria-label="Urbanisme">
+                <li><a href="Urbanisme.html" role="menuitem">P.L.U.I</a></li>
+                <li><a href="http://cadastre.gouv.fr/" role="menuitem">Cadastre</a></li>
+                <li><a href="Cimetiere.html" role="menuitem">Cimetière</a></li>
+              </ul>
+            </li>
+            <li><a href="Administratif.html" role="menuitem">Administratif</a></li>
+            <li><a href="Tarifs.html" role="menuitem">Tarifs</a></li>
+            <li><a href="Travaux.html" role="menuitem">Travaux</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" role="menuitem">Les Syndicats Intercommunaux</a>
+          <ul class="dropdown" role="menu" aria-label="Les Syndicats Intercommunaux">
+            <li><a href="https://www.porteseureliennesidf.fr/pages/service-collecte-et-valorisation-des-dechets-menagers-223.html" role="menuitem">Ordures ménagères</a></li>
+            <li><a href="http://www.sitreva.fr/" role="menuitem">Déchetterie</a></li>
+            <li><a href="Ecole.html" role="menuitem">Regroupement pédagogique</a></li>
+            <li><a href="http://www.synd-eaux-villemeux.fr/accueil/historique/" role="menuitem">Eaux de Ruffin</a></li>
+            <li role="none">
+              <a href="https://www.sbv4r.fr/" role="menuitem">S.E.B.V <span class="sub-arrow">›</span></a>
+              <ul class="sub-dropdown" role="menu" aria-label="S.E.B.V">
+                <li><a href="https://www.sbv4r.fr/" role="menuitem">S.E.B.V</a></li>
+                <li><a href="GEMAPI.html" role="menuitem">GEMAPI</a></li>
+              </ul>
+            </li>
+            <li><a href="https://www.energie28.fr/" role="menuitem">Territoire Energie 28</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" role="menuitem">Nos Enfants</a>
+          <ul class="dropdown" role="menu" aria-label="Nos Enfants">
+            <li><a href="Ecole.html" role="menuitem">Ecoles</a></li>
+            <li><a href="Periscolaire.html" role="menuitem">Périscolaire</a></li>
+            <li><a href="Assistantes Maternelles.html" role="menuitem">Assistantes Maternelles</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="https://www.porteseureliennesidf.fr/" role="menuitem">Communauté de Communes</a>
+          <ul class="dropdown" role="menu" aria-label="Communauté de Communes">
+            <li><a href="http://www.porteseureliennesidf.fr/index.php/La-communauté-de-communes?idpage=2&afficheMenuContextuel=true" role="menuitem">Com.Com PEIDF</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" role="menuitem">Publications</a>
+          <ul class="dropdown" role="menu" aria-label="Publications">
+            <li><a href="Petit_Chaudonnais.html" role="menuitem">Petit Chaudonnais</a></li>
+            <li><a href="Bulletins municipaux.html" role="menuitem">Bulletin municipal</a></li>
+            <li><a href="Manifestation.html" role="menuitem">Manifestations</a></li>
+          </ul>
+        </li>
+
+      </ul><!-- /nav-menu -->
+    </div>
+  </nav>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero" aria-label="Bienvenue">
+  <div class="hero-content">
+    <h2>Bienvenue à Chaudon</h2>
+    <p class="hero-desc">
+      Nichée dans la vallée de l'Eure entre Dreux et Nogent-le-Roi,<br>
+      Chaudon vous accueille au cœur de l'Eure-et-Loir.
+    </p>
+    <div class="hero-meta">✦ &nbsp;Commune d'Eure-et-Loir &nbsp;·&nbsp; 28210 &nbsp;✦</div>
+  </div>
+</section>
+
+<!-- ══ MAIN ══ -->
+<main>
+  <div class="main-grid">
+
+    <!-- COLONNE GAUCHE — Actualités -->
+    <aside class="col-left" aria-label="Actualités et manifestations">
+      <p class="section-title">Actualités &amp; manifestations</p>
+      <div class="affiches-grid">
+
+        <a href="Manifestation.html" class="affiche-card">
+          <img src="images/Affiche chaudon Loisirs 2026 mini.jpg"
+               alt="Affiche Chaudon Loisirs 2026" class="affiche-thumb">
+          <div class="affiche-info">
+            <strong>Chaudon Loisirs 2026</strong>
+            <span>Programme des manifestations</span>
+          </div>
+        </a>
+
+        <a href="Manifestation.html" class="affiche-card">
+          <img src="images/Affiche Loto 2026.04.04 mini.jpg"
+               alt="Affiche Loto 2026" class="affiche-thumb">
+          <div class="affiche-info">
+            <strong>Loto 2026</strong>
+            <span>Manifestations → voir le programme</span>
+          </div>
+        </a>
+
+        <a href="P Ch 133-2.pdf" class="affiche-card">
+          <img src="images/Pch 133 mini.jpg"
+               alt="Petit Chaudonnais n°133" class="affiche-thumb">
+          <div class="affiche-info">
+            <strong>Petit Chaudonnais n°133</strong>
+            <span>Bulletin municipal</span>
+          </div>
+        </a>
+
+        <a href="GEMAPI.html" class="affiche-card">
+          <img src="SEBV/Gemapi-2.jpg"
+               alt="GEMAPI" class="affiche-thumb">
+          <div class="affiche-info">
+            <strong>GEMAPI</strong>
+            <span>Gestion des milieux aquatiques</span>
+          </div>
+        </a>
+
+        <a href="Chateau.html" class="affiche-card">
+          <img src="images/Fresque-1.jpg"
+               alt="Fresque du château" class="affiche-thumb">
+          <div class="affiche-info">
+            <strong>Fresque du Château</strong>
+            <span>Patrimoine local</span>
+          </div>
+        </a>
+
+      </div>
+    </aside>
+
+    <!-- COLONNE CENTRALE -->
+    <div class="col-center">
+
+      <!-- Bienvenue dynamique -->
+      <div class="bienvenue-box" aria-live="polite">
+        <p class="bienvenue-msg" id="msg-bienvenue">Bienvenue sur le site de la commune de Chaudon.</p>
+        <div class="horloge" id="horloge" aria-label="Heure actuelle">--:--:--</div>
+      </div>
+
+      <!-- Présentation -->
+      <div class="commune-box">
+        <p>
+          <strong>Chaudon</strong> est une commune de la région Centre, au nord du département de l'Eure-et-Loir.
+          Elle s'étire le long de la vallée de l'Eure entre Dreux et Nogent-le-Roi.
+          Outre le centre-bourg, Chaudon possède trois hameaux :
+          <a href="Ruffin 0.html">Ruffin</a> (partagé avec Bréchamps),
+          <a href="Colombier 0.html">Vaubrun</a> (partagé avec Nogent-le-Roi)
+          et <a href="Mormoulins 1.html">Mormoulins</a>.
+        </p>
+      </div>
+
+      <!-- Photo mairie + bulletin -->
+      <div class="mairie-row">
+        <a href="La Mairie.html" class="mairie-photo-link">
+          <img src="images/mairie aout 2001.jpg"
+               alt="Mairie de Chaudon" class="mairie-photo">
+        </a>
+        <a href="Bulletins municipaux.html">
+          <img src="images/BM 2026 mini.jpg"
+               alt="Bulletin municipal 2026" class="bulletin-thumb">
+        </a>
+      </div>
+
+    </div>
+
+    <!-- COLONNE DROITE -->
+    <aside class="col-right" aria-label="Localisation et réseaux">
+      <p class="section-title">Localisation</p>
+
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2108.0124766882986!2d1.4980781974602583!3d48.657542954799005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e403aff009f6bb%3A0xe9db47302e730d2e!2sMairie+-+Centre+de+loisirs!5e0!3m2!1sfr!2sfr!4v1543074476219"
+          height="220"
+          allowfullscreen
+          loading="lazy"
+          title="Carte de la Mairie de Chaudon"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <a href="Geographie.html">
+        <img src="images/Limite Commune de Chaudon mini.jpg"
+             alt="Limites de la commune de Chaudon" class="carte-commune">
+      </a>
+
+      <p class="section-title" style="margin-top:.5rem">Réseaux sociaux</p>
+      <a href="http://www.facebook.com/28210Chaudon/" class="social-block" target="_blank" rel="noopener">
+        <div class="fb-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </div>
+        <div class="social-text">
+          <strong>Chaudon sur Facebook</strong>
+          <span>Retrouvez-nous sur la page officielle</span>
+        </div>
+      </a>
+    </aside>
+
+  </div><!-- /main-grid -->
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>
+    Mairie de Chaudon &mdash; 28210 Chaudon &mdash; Eure-et-Loir
+    &nbsp;|&nbsp;
+    <a href="Administratif.html">Contact &amp; horaires</a>
+  </p>
+</footer>
+
+<script>
+(function() {
+  var jours = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+  var mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  var salut = ["bonne nuit","bon réveil","bonne matinée","bonne matinée","bonne matinée","bonne matinée","bonne matinée","bonne matinée","bonne matinée","bonne matinée","bonne matinée","bonne matinée","bon appétit","bon après-midi","bon après-midi","bon après-midi","bon après-midi","bonne fin d'après-midi","bonne fin d'après-midi","bonne soirée","bonne soirée","bonne soirée","bonne nuit","bonne nuit"];
+
+  function pad(n) { return n < 10 ? "0" + n : n; }
+
+  function updateClock() {
+    var d = new Date();
+    var h = d.getHours(), m = d.getMinutes(), s = d.getSeconds();
+    var el = document.getElementById("horloge");
+    if (el) el.textContent = pad(h) + ":" + pad(m) + ":" + pad(s);
+    setTimeout(updateClock, 1000);
+  }
+
+  function setWelcome() {
+    var d = new Date();
+    var h = d.getHours();
+    var msg = "Bienvenue, " + salut[h] + " — nous sommes le "
+      + jours[d.getDay()] + " " + d.getDate() + " " + mois[d.getMonth()] + ".";
+    var el = document.getElementById("msg-bienvenue");
+    if (el) el.textContent = msg;
+
+    var hdr = document.getElementById("hdr-date");
+    if (hdr) {
+      hdr.innerHTML = jours[d.getDay()].charAt(0).toUpperCase() + jours[d.getDay()].slice(1)
+        + " " + d.getDate() + " " + mois[d.getMonth()] + "<br>" + d.getFullYear();
+    }
+  }
+
+  updateClock();
+  setWelcome();
+
+  // ── Hamburger ──
+  var btn = document.getElementById("ham-btn");
+  var menu = document.getElementById("nav-menu");
+  if (btn && menu) {
+    btn.addEventListener("click", function() {
+      var open = menu.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open);
+    });
+  }
+
+  // ── Mobile sous-menus ──
+  document.querySelectorAll(".nav-menu > li > a, .dropdown > li > a").forEach(function(a) {
+    if (a.nextElementSibling && (a.nextElementSibling.classList.contains("dropdown") || a.nextElementSibling.classList.contains("sub-dropdown"))) {
+      a.addEventListener("click", function(e) {
+        if (window.innerWidth <= 900) {
+          e.preventDefault();
+          var li = a.parentElement;
+          li.classList.toggle("mob-open");
+        }
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
