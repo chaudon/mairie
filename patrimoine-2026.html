@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journées Européennes du Patrimoine 2026 — Commune de Chaudon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bleu:    #1a3a7c;
+    --bleu-c:  #2655b0;
+    --bleu-f:  #0d2155;
+    --or:      #d4a017;
+    --or-c:    #f0c040;
+    --or-f:    #9a7010;
+    --blanc:   #f5f3ee;
+    --gris:    #e8e4dc;
+    --texte:   #1a1a1a;
+    --texte-s: #555;
+    --nav-h:   68px;
+    --vert:    #3a6a20;
+    --vert-fond: #e8f0e0;
+    --ambre:   #7a4a10;
+    --ambre-fond: #fef3dc;
+    --alerte:  #7a2a00;
+    --alerte-fond: #fde8d8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--blanc);
+    color: var(--texte);
+    min-height: 100vh;
+  }
+
+  /* ══════════ HEADER (identique index) ══════════ */
+  header {
+    background: var(--bleu-f);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .6rem 2rem;
+    border-bottom: 2px solid var(--or);
+  }
+
+  .header-logo { height: 52px; width: auto; flex-shrink: 0; }
+
+  .header-titles { flex: 1; min-width: 0; }
+
+  .header-titles h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--or-c);
+    line-height: 1.15;
+  }
+
+  .header-titles span {
+    font-size: .8rem;
+    color: rgba(255,255,255,.65);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+  }
+
+  .header-date {
+    text-align: right;
+    font-size: .78rem;
+    color: rgba(255,255,255,.65);
+    line-height: 1.6;
+    flex-shrink: 0;
+    display: none;
+  }
+
+  @media (min-width: 640px) { .header-date { display: block; } }
+
+  /* ══════════ NAV (identique index) ══════════ */
+  nav { background: var(--bleu); position: relative; }
+
+  .nav-inner { display: flex; align-items: stretch; max-width: 1400px; margin: 0 auto; }
+
+  .hamburger {
+    display: none;
+    background: none; border: none; color: white;
+    padding: .75rem 1.25rem; cursor: pointer; font-size: 1.4rem;
+    align-items: center; gap: .5rem; font-family: 'Source Serif 4', serif;
+  }
+  .hamburger span { font-size: .85rem; }
+
+  .nav-menu { display: flex; list-style: none; flex: 1; flex-wrap: wrap; }
+  .nav-menu > li { position: relative; }
+
+  .nav-menu > li > a {
+    display: flex; align-items: center; gap: .3rem;
+    padding: 0 1.1rem; height: var(--nav-h);
+    color: rgba(255,255,255,.88); text-decoration: none;
+    font-size: .82rem; font-family: 'Source Serif 4', serif; font-weight: 400;
+    letter-spacing: .03em; white-space: nowrap;
+    transition: background .18s, color .18s; border-bottom: 3px solid transparent;
+  }
+
+  .nav-menu > li > a:hover, .nav-menu > li > a.active {
+    background: rgba(255,255,255,.1); color: var(--or-c); border-bottom-color: var(--or);
+  }
+
+  .nav-menu > li > a::after { content: '▾'; font-size: .65rem; opacity: .6; margin-left: .2rem; }
+  .nav-menu > li > a.no-arrow::after { display: none; }
+
+  .dropdown {
+    display: none; position: absolute; top: 100%; left: 0;
+    background: var(--bleu-f); min-width: 220px;
+    border-top: 2px solid var(--or); box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    z-index: 999; list-style: none;
+  }
+  .nav-menu > li:hover > .dropdown { display: block; }
+  .dropdown li { position: relative; }
+
+  .dropdown a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .65rem 1.1rem; color: rgba(255,255,255,.82); text-decoration: none;
+    font-size: .8rem; font-family: 'Source Serif 4', serif;
+    transition: background .15s, color .15s; border-left: 3px solid transparent;
+  }
+  .dropdown a:hover { background: rgba(255,255,255,.1); color: var(--or-c); border-left-color: var(--or); }
+  .dropdown .sub-arrow { font-size: .6rem; opacity: .6; }
+
+  .sub-dropdown {
+    display: none; position: absolute; left: 100%; top: 0;
+    background: var(--bleu-f); min-width: 200px; border-top: 2px solid var(--or);
+    box-shadow: 4px 8px 24px rgba(0,0,0,.35); list-style: none; z-index: 1000;
+  }
+  .dropdown li:hover > .sub-dropdown { display: block; }
+
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+    .nav-menu {
+      display: none; flex-direction: column; position: absolute;
+      top: 100%; left: 0; right: 0; background: var(--bleu-f);
+      z-index: 998; max-height: 80vh; overflow-y: auto; border-top: 2px solid var(--or);
+    }
+    .nav-menu.open { display: flex; }
+    .nav-menu > li > a { height: auto; padding: .85rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,.1); border-left: 3px solid transparent; }
+    .nav-menu > li > a:hover { border-left-color: var(--or); border-bottom-color: rgba(255,255,255,.1); }
+    .dropdown { position: static; display: none; box-shadow: none; border-top: none; background: rgba(0,0,0,.2); }
+    .nav-menu > li.mob-open > .dropdown { display: block; }
+    .sub-dropdown { position: static; display: none; background: rgba(0,0,0,.25); border-top: none; }
+    .dropdown li.mob-open > .sub-dropdown { display: block; }
+    .dropdown a { padding: .6rem 1.8rem; font-size: .78rem; }
+    .sub-dropdown a { padding: .55rem 2.4rem; font-size: .75rem; }
+  }
+
+  /* ══════════ HERO ══════════ */
+  .hero {
+    background: linear-gradient(160deg, var(--bleu-f) 0%, var(--bleu) 55%, #2a5090 100%);
+    color: white; padding: 3.5rem 2rem 3rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(212,160,23,.04) 0px, rgba(212,160,23,.04) 1px, transparent 1px, transparent 40px);
+  }
+  .hero-content { position: relative; max-width: 760px; margin: 0 auto; }
+
+  .hero-kicker {
+    font-size: .74rem; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(255,255,255,.6); margin-bottom: .8rem; font-family: 'Source Serif 4', serif;
+  }
+
+  .hero h2 {
+    font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 4.5vw, 2.7rem);
+    font-weight: 600; color: var(--or-c); letter-spacing: .06em; margin-bottom: .6rem;
+  }
+  .hero h2 em { font-style: italic; color: white; font-family: 'Source Serif 4', serif; font-weight: 300; }
+
+  .hero-desc {
+    font-size: clamp(.9rem, 2vw, 1.05rem); color: rgba(255,255,255,.8);
+    line-height: 1.7; font-style: italic; margin-bottom: 1.6rem;
+  }
+
+  .hero-dates { display: inline-flex; gap: .7rem; flex-wrap: wrap; justify-content: center; margin-bottom: .9rem; }
+
+  .date-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(255,255,255,.1); border: 1px solid var(--or);
+    border-radius: 2rem; padding: .45rem 1.3rem; font-size: .85rem;
+    color: var(--or-c); font-family: 'Cinzel', serif; letter-spacing: .03em;
+  }
+
+  .hero-note {
+    margin-top: 1rem; font-size: .85rem; color: rgba(255,255,255,.65);
+    letter-spacing: .02em; line-height: 1.6;
+  }
+  .hero-note strong { color: var(--or-c); font-weight: 600; }
+
+  /* ══════════ BANDEAU INFO ══════════ */
+  .intro-band {
+    background: var(--bleu-c); color: white; text-align: center;
+    padding: .85rem 1.5rem; font-size: .88rem; letter-spacing: .02em;
+  }
+  .intro-band strong { color: var(--or-c); }
+
+  /* ══════════ SECTIONS ══════════ */
+  main { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
+
+  section { padding: 2.5rem 0; }
+  section + section { padding-top: 0; }
+
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: .8rem; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--or-f);
+    border-bottom: 2px solid var(--or); padding-bottom: .5rem; margin-bottom: 1.5rem;
+  }
+
+  /* ── Grille des sites ── */
+  .sites-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.1rem;
+  }
+
+  .site-card {
+    background: white; border: 1px solid var(--gris); border-top: 3px solid var(--or);
+    border-radius: 8px; padding: 1.1rem 1.2rem; transition: box-shadow .18s, border-color .18s;
+  }
+  .site-card:hover { box-shadow: 0 4px 16px rgba(26,58,124,.14); }
+
+  .site-card img {
+    width: 100%; height: 130px; object-fit: cover; border-radius: 5px;
+    margin-bottom: .8rem; border: 1px solid var(--gris);
+  }
+
+  .card-icon { font-size: 1.6rem; display: block; margin-bottom: .3rem; }
+
+  .site-card h3 {
+    font-family: 'Cinzel', serif; font-size: .98rem; font-weight: 600;
+    color: var(--bleu); margin-bottom: .4rem; letter-spacing: .02em;
+  }
+
+  .site-card p { font-size: .85rem; color: var(--texte-s); line-height: 1.6; }
+
+  .site-meta { font-size: .8rem; color: var(--texte-s); margin-top: .5rem; line-height: 1.5; }
+
+  .site-link {
+    display: inline-block; margin-top: .5rem; font-size: .8rem;
+    color: var(--bleu-c); text-decoration: none; border-bottom: 1px dotted var(--bleu-c);
+  }
+  .site-link:hover { color: var(--or-f); border-bottom-color: var(--or-f); }
+
+  .badge {
+    display: inline-block; margin-top: .6rem; font-size: .7rem; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase; padding: .25rem .65rem; border-radius: 3px;
+  }
+  .badge-libre       { background: var(--vert-fond);   color: var(--vert); }
+  .badge-inscription { background: var(--alerte-fond);  color: var(--alerte); }
+  .badge-aconfirmer  { background: var(--ambre-fond);   color: var(--ambre); }
+
+  .note-card {
+    background: #fffaf0; border: 1px dashed var(--or); border-radius: 6px;
+    padding: .8rem 1.1rem; font-size: .85rem; color: var(--or-f);
+    font-style: italic; margin-top: 1.2rem;
+  }
+
+  hr.divider { border: none; border-top: 1px solid var(--gris); margin: 0; }
+
+  /* ══════════ FORMULAIRE ══════════ */
+  .form-section {
+    background: linear-gradient(160deg, var(--bleu-f) 0%, var(--bleu) 100%);
+    padding: 2.75rem 0 3.25rem;
+  }
+  .form-section-inner { max-width: 980px; margin: 0 auto; padding: 0 1.5rem; }
+  .form-inner { max-width: 640px; margin: 0 auto; }
+
+  .form-section .section-title { color: var(--or-c); border-bottom-color: rgba(212,160,23,.4); }
+
+  .form-lead {
+    color: rgba(255,255,255,.75); font-size: .95rem; margin-bottom: 1.3rem; line-height: 1.7;
+  }
+  .form-lead strong { color: var(--or-c); }
+
+  .form-card { background: var(--blanc); border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,.3); overflow: hidden; }
+
+  .form-card-header { background: white; padding: 1.4rem 1.8rem 1rem; border-bottom: 1px solid var(--gris); }
+  .form-card-header h3 {
+    font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--bleu); margin-bottom: .3rem; letter-spacing: .02em;
+  }
+  .form-card-header p { font-size: .85rem; color: var(--texte-s); }
+
+  form { padding: 1.6rem 1.8rem 1.8rem; }
+  @media (max-width: 480px) { form { padding: 1.1rem; } .form-card-header { padding: 1rem 1.1rem; } }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+  @media (max-width: 450px) { .form-row { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .9rem; }
+
+  label {
+    font-size: .74rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--bleu); font-family: 'Source Serif 4', serif;
+  }
+  label .req { color: var(--alerte); margin-left: 2px; }
+
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+    font-family: 'Source Serif 4', serif; font-size: 1rem; color: var(--texte);
+    background: #fff; border: 1.5px solid var(--gris); border-radius: 5px;
+    padding: .58rem .8rem; width: 100%; transition: border-color .18s, box-shadow .18s;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--bleu-c); box-shadow: 0 0 0 3px rgba(38,85,176,.12);
+  }
+  textarea { resize: vertical; min-height: 75px; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%231a3a7c' d='M5 6L0 0h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right .8rem center; padding-right: 2rem; cursor: pointer;
+  }
+
+  .field-group-label {
+    font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--bleu); margin-bottom: .4rem; display: block; font-family: 'Source Serif 4', serif;
+  }
+  .field-group-label .req { color: var(--alerte); margin-left: 2px; }
+
+  .jour-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: .9rem; }
+  @media (max-width: 360px) { .jour-grid { grid-template-columns: 1fr; } }
+
+  .jour-opt { position: relative; }
+  .jour-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .jour-opt label {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem;
+    padding: .7rem .3rem; border: 1.5px solid var(--gris); border-radius: 5px; cursor: pointer;
+    background: #fff; text-align: center; transition: all .15s; text-transform: none; letter-spacing: 0;
+  }
+  .jour-opt label .j-icon { font-size: 1.25rem; line-height: 1; }
+  .jour-opt label .j-name { font-size: .85rem; font-weight: 600; color: var(--bleu); }
+  .jour-opt label .j-date { font-size: .75rem; color: var(--texte-s); }
+  .jour-opt input:checked + label { background: var(--bleu); border-color: var(--bleu); }
+  .jour-opt input:checked + label .j-name, .jour-opt input:checked + label .j-date { color: #fff; }
+  .jour-opt label:hover { border-color: var(--bleu-c); }
+
+  .counter {
+    display: flex; align-items: center; border: 1.5px solid var(--gris); border-radius: 5px;
+    overflow: hidden; background: #fff; max-width: 130px;
+  }
+  .counter button {
+    width: 34px; height: 34px; border: none; background: var(--gris); color: var(--bleu);
+    font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: background .15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .counter button:hover { background: #d8d2c4; }
+  #nb-display {
+    flex: 1; text-align: center; font-family: 'Cinzel', serif; font-size: 1.1rem;
+    font-weight: 600; color: var(--bleu); border: none; background: transparent; padding: 0; pointer-events: none; width: 40px;
+  }
+
+  .rgpd-row {
+    display: flex; align-items: flex-start; gap: .6rem; background: var(--gris);
+    border: 1px solid #d8d2c0; border-radius: 5px; padding: .8rem .9rem; margin-bottom: 1rem;
+  }
+  .rgpd-row input[type="checkbox"] { width: 17px; height: 17px; min-width: 17px; margin-top: 2px; accent-color: var(--bleu); cursor: pointer; }
+  .rgpd-row label {
+    font-size: .8rem; letter-spacing: 0; text-transform: none; color: var(--texte-s);
+    font-weight: 400; cursor: pointer; line-height: 1.5; font-family: 'Source Serif 4', serif;
+  }
+
+  .warn-box {
+    background: var(--ambre-fond); border: 1px solid var(--or); border-radius: 5px;
+    padding: .65rem .9rem; font-size: .85rem; color: var(--ambre); margin-bottom: .9rem; line-height: 1.5;
+  }
+
+  .submit-btn {
+    width: 100%; padding: .9rem; background: var(--bleu); color: #fff;
+    font-family: 'Cinzel', serif; font-size: .95rem; font-weight: 600; letter-spacing: .06em;
+    border: none; border-radius: 5px; cursor: pointer; transition: background .2s, transform .1s;
+    box-shadow: 0 4px 14px rgba(13,33,85,.35); text-transform: uppercase;
+  }
+  .submit-btn:hover { background: var(--bleu-f); }
+  .submit-btn:active { transform: translateY(1px); }
+  .submit-btn:disabled { background: #8898c0; cursor: wait; }
+
+  #success-msg { display: none; text-align: center; padding: 2.5rem 1.5rem; }
+  #success-msg .s-icon { font-size: 3rem; margin-bottom: .8rem; }
+  #success-msg h3 {
+    font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 600;
+    color: var(--bleu); margin-bottom: .6rem; letter-spacing: .02em;
+  }
+  #success-msg p { color: var(--texte-s); font-size: 1rem; line-height: 1.7; }
+
+  .spinner {
+    display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.3);
+    border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 7px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ══════════ FOOTER (identique index) ══════════ */
+  footer {
+    background: var(--bleu-f); color: rgba(255,255,255,.65); text-align: center;
+    padding: 1.5rem 2rem; font-size: .78rem; border-top: 2px solid var(--or);
+    margin-top: 0; font-style: italic;
+  }
+  footer a { color: var(--or-c); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="header-top">
+    <img src="logo-mairie-chaudon.png" alt="Armoiries de Chaudon" class="header-logo">
+    <div class="header-titles">
+      <h1>Commune de Chaudon</h1>
+      <span>Eure-et-Loir · 28210</span>
+    </div>
+    <div class="header-date" id="hdr-date"></div>
+  </div>
+
+  <!-- ══ NAV ══ -->
+  <nav aria-label="Navigation principale">
+    <div class="nav-inner">
+      <button class="hamburger" id="ham-btn" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="0" y1="2" x2="22" y2="2"/><line x1="0" y1="8" x2="22" y2="8"/><line x1="0" y1="14" x2="22" y2="14"/></svg>
+        <span>Menu</span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu" role="menubar">
+
+        <li role="none"><a href="../index.html" class="no-arrow" role="menuitem">Accueil</a></li>
+
+        <li role="none">
+          <a href="#" class="no-arrow" role="menuitem">La commune de Chaudon</a>
+          <ul class="dropdown" role="menu" aria-label="La commune de Chaudon">
+            <li><a href="../1011.html" role="menuitem">Plan de Chaudon</a></li>
+            <li><a href="../Geographie.html" role="menuitem">Géographie</a></li>
+            <li role="none">
+              <a href="#" role="menuitem">Histoire <span class="sub-arrow">›</span></a>
+              <ul class="sub-dropdown" role="menu" aria-label="Histoire">
+                <li><a href="../Histoire .html" role="menuitem">Chaudon Origine</a></li>
+                <li><a href="../siecle.html" role="menuitem">Histoire d'un siècle</a></li>
+                <li><a href="../Maires de Chaudon.pdf" role="menuitem">Les Maires de Chaudon</a></li>
+              </ul>
+            </li>
+            <li><a href="../Patrimoine .html" role="menuitem">Patrimoine</a></li>
+            <li><a href="patrimoine-2026.html" class="active" role="menuitem">Journées du Patrimoine 2026</a></li>
+            <li><a href="../cassegrain .html" role="menuitem">Laurent Cassegrain</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" class="no-arrow" role="menuitem">La Mairie</a>
+          <ul class="dropdown" role="menu" aria-label="La Mairie">
+            <li><a href="../La Mairie.html" role="menuitem">Le Conseil Municipal</a></li>
+            <li><a href="../conseil municipal.html" role="menuitem">Compte rendu Conseil Municipal</a></li>
+            <li role="none">
+              <a href="#" role="menuitem">Urbanisme <span class="sub-arrow">›</span></a>
+              <ul class="sub-dropdown" role="menu" aria-label="Urbanisme">
+                <li><a href="../Urbanisme.html" role="menuitem">P.L.U.I</a></li>
+                <li><a href="http://cadastre.gouv.fr/" role="menuitem">Cadastre</a></li>
+                <li><a href="../Cimetiere.html" role="menuitem">Cimetière</a></li>
+              </ul>
+            </li>
+            <li><a href="../Administratif.html" role="menuitem">Administratif</a></li>
+            <li><a href="../Tarifs.html" role="menuitem">Tarifs</a></li>
+            <li><a href="../Travaux.html" role="menuitem">Travaux</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" class="no-arrow" role="menuitem">Les Syndicats Intercommunaux</a>
+          <ul class="dropdown" role="menu" aria-label="Les Syndicats Intercommunaux">
+            <li><a href="https://www.porteseureliennesidf.fr/pages/service-collecte-et-valorisation-des-dechets-menagers-223.html" role="menuitem">Ordures ménagères</a></li>
+            <li><a href="http://www.sitreva.fr/" role="menuitem">Déchetterie</a></li>
+            <li><a href="../Ecole.html" role="menuitem">Regroupement pédagogique</a></li>
+            <li><a href="http://www.synd-eaux-villemeux.fr/accueil/historique/" role="menuitem">Eaux de Ruffin</a></li>
+            <li role="none">
+              <a href="https://www.sbv4r.fr/" role="menuitem">S.E.B.V <span class="sub-arrow">›</span></a>
+              <ul class="sub-dropdown" role="menu" aria-label="S.E.B.V">
+                <li><a href="https://www.sbv4r.fr/" role="menuitem">S.E.B.V</a></li>
+                <li><a href="../GEMAPI.html" role="menuitem">GEMAPI</a></li>
+              </ul>
+            </li>
+            <li><a href="https://www.energie28.fr/" role="menuitem">Territoire Energie 28</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" class="no-arrow" role="menuitem">Nos Enfants</a>
+          <ul class="dropdown" role="menu" aria-label="Nos Enfants">
+            <li><a href="../Ecole.html" role="menuitem">Ecoles</a></li>
+            <li><a href="../Periscolaire.html" role="menuitem">Périscolaire</a></li>
+            <li><a href="../Assistantes Maternelles.html" role="menuitem">Assistantes Maternelles</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="https://www.porteseureliennesidf.fr/" role="menuitem">Communauté de Communes</a>
+          <ul class="dropdown" role="menu" aria-label="Communauté de Communes">
+            <li><a href="http://www.porteseureliennesidf.fr/index.php/La-communauté-de-communes?idpage=2&afficheMenuContextuel=true" role="menuitem">Com.Com PEIDF</a></li>
+          </ul>
+        </li>
+
+        <li role="none">
+          <a href="#" class="no-arrow" role="menuitem">Publications</a>
+          <ul class="dropdown" role="menu" aria-label="Publications">
+            <li><a href="../Petit_Chaudonnais.html" role="menuitem">Petit Chaudonnais</a></li>
+            <li><a href="../Bulletins municipaux.html" role="menuitem">Bulletin municipal</a></li>
+            <li><a href="../Manifestation.html" role="menuitem">Manifestations</a></li>
+          </ul>
+        </li>
+
+      </ul><!-- /nav-menu -->
+    </div>
+  </nav>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero" aria-label="Journées du Patrimoine">
+  <div class="hero-content">
+    <p class="hero-kicker">Mairie de Chaudon · Eure-et-Loir</p>
+    <h2>Journées <em>du Patrimoine</em></h2>
+    <p class="hero-desc">Partez à la découverte du patrimoine de Chaudon, entre moulin, église et vieux village.</p>
+    <div class="hero-dates">
+      <span class="date-badge">✦ Samedi 19 septembre 2026</span>
+      <span class="date-badge">✦ Dimanche 20 septembre 2026</span>
+    </div>
+    <p class="hero-note">
+      ⚙️ Le Moulin de Mormoulins ouvre à des dates décalées —
+      <strong>samedi 26 &amp; dimanche 27 septembre 2026</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ══ BANDEAU INFO ══ -->
+<div class="intro-band">
+  <!-- ✏️ HORAIRES / GRATUIT → modifier ici -->
+  Entrée <strong>gratuite</strong> · Ouvert de <strong>9h à 18h</strong> · Plusieurs sites à visiter dans le village
+</div>
+
+<main>
+
+  <!-- ══ SITES ══ -->
+  <section>
+    <p class="section-title">Les sites ouverts</p>
+    <div class="sites-grid">
+
+      <!-- ✏️ SITES → modifier / ajouter / supprimer des blocs site-card -->
+
+      <div class="site-card">
+        <img src="moulin.jpg" alt="Moulin de Mormoulins" onerror="this.style.display='none'">
+        <span class="card-icon">⚙️</span>
+        <h3>Moulin de Mormoulins</h3>
+        <p>Découverte du patrimoine meulier de Chaudon. Visite guidée sur inscription.</p>
+        <p class="site-meta">📍 Route de Mauzaize<br>28210 Chaudon</p>
+        <a href="https://www.moulindemormoulins.fr/" target="_blank" rel="noopener" class="site-link">🌐 Site du moulin</a><br>
+        <span class="badge badge-inscription">Réservation obligatoire ↓</span>
+        <p class="site-meta">📅 26 &amp; 27 septembre · ⚠️ −7 ans non admis</p>
+      </div>
+
+      <div class="site-card">
+        <img src="pompiers.jpg" alt="Arsenal de Chaudon" onerror="this.style.display='none'">
+        <span class="card-icon">🏛️</span>
+        <h3>Arsenal</h3>
+        <p>Exposition photos et vidéos sur le vieux Chaudon.</p>
+        <p class="site-meta">📍 5 Impasse de l'Arsenal, 28210 Chaudon</p>
+        <span class="badge badge-aconfirmer">À confirmer</span>
+      </div>
+
+      <div class="site-card">
+        <img src="eglise.jpg" alt="Église de Chaudon" onerror="this.style.display='none'">
+        <span class="card-icon">⛪</span>
+        <h3>Église de Chaudon</h3>
+        <p>Ouverture exceptionnelle de l'église du village, avec la présence d'un bénévole.</p>
+        <p class="site-meta">📍 10 Rue de l'Église, 28210 Chaudon</p>
+        <span class="badge badge-libre">Visite libre</span>
+      </div>
+
+      <div class="site-card">
+        <img src="lavoir.jpg" alt="Lavoir de Chaudon" onerror="this.style.display='none'">
+        <span class="card-icon">🪣</span>
+        <h3>Le Lavoir</h3>
+        <p>Visite du lavoir, témoin du patrimoine rural d'autrefois.</p>
+        <p class="site-meta">📍 4 Route Nationale, 28210 Chaudon</p>
+        <span class="badge badge-libre">Visite libre</span>
+      </div>
+
+      <!-- ✏️ CHÂTEAU → retirer les balises de commentaire si confirmé
+      <div class="site-card">
+        <img src="chateau.jpg" alt="Château de Mormoulins" onerror="this.style.display='none'">
+        <span class="card-icon">🏰</span>
+        <h3>Château de Mormoulins</h3>
+        <p>Visite du château — informations à venir.</p>
+        <span class="badge badge-aconfirmer">À confirmer</span>
+      </div>
+      -->
+
+    </div>
+    <!-- ✏️ Supprimer cette note quand le programme est finalisé -->
+    <p class="note-card">📌 Programme en cours de finalisation — commission patrimoine le 24 juin. Des confirmations seront communiquées prochainement.</p>
+  </section>
+
+</main>
+
+<hr class="divider">
+
+<!-- ══ FORMULAIRE ══ -->
+<div class="form-section">
+  <div class="form-section-inner">
+    <div class="form-inner">
+      <p class="section-title">Inscription au Moulin de Mormoulins</p>
+      <p class="form-lead">
+        Visites guidées · Réservation obligatoire · 15 personnes maximum par groupe.<br>
+        <strong>⚠️ Enfants de moins de 7 ans non admis pour des raisons de sécurité.</strong>
+      </p>
+      <div class="form-card">
+        <div class="form-card-header">
+          <h3>Réservez votre visite</h3>
+          <p>Confirmation envoyée par email après inscription</p>
+        </div>
+
+        <div id="form-area">
+          <form id="inscriptionForm" novalidate>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="prenom">Prénom <span class="req">*</span></label>
+                <input type="text" id="prenom" name="prenom" placeholder="Marie" required autocomplete="given-name">
+              </div>
+              <div class="field">
+                <label for="nom">Nom <span class="req">*</span></label>
+                <input type="text" id="nom" name="nom" placeholder="Dupont" required autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="email">Email <span class="req">*</span></label>
+                <input type="email" id="email" name="email" placeholder="marie@exemple.fr" required autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="telephone">Téléphone</label>
+                <input type="tel" id="telephone" name="telephone" placeholder="06 12 34 56 78" autocomplete="tel">
+              </div>
+            </div>
+
+            <!-- ✏️ JOURS → modifier les value="..." et les textes j-name / j-date -->
+            <div style="margin-bottom:0.9rem;">
+              <span class="field-group-label">Jour souhaité <span class="req">*</span></span>
+              <div class="jour-grid">
+                <div class="jour-opt">
+                  <input type="radio" name="jour" id="j-sam" value="Samedi 26 septembre 2026" required>
+                  <label for="j-sam">
+                    <span class="j-icon">🗓</span>
+                    <span class="j-name">Samedi</span>
+                    <span class="j-date">26 sept.</span>
+                  </label>
+                </div>
+                <div class="jour-opt">
+                  <input type="radio" name="jour" id="j-dim" value="Dimanche 27 septembre 2026">
+                  <label for="j-dim">
+                    <span class="j-icon">🗓</span>
+                    <span class="j-name">Dimanche</span>
+                    <span class="j-date">27 sept.</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="creneau">Créneau horaire <span class="req">*</span></label>
+              <select id="creneau" name="creneau" required>
+                <option value="">— Choisir un créneau —</option>
+                <option value="10h30">🕙 10h30 (durée 1h30)</option>
+                <option value="14h00">🕑 14h00 (durée 1h30)</option>
+                <option value="16h00">🕓 16h00 (durée 1h30)</option>
+              </select>
+              <div id="places-info" style="margin-top:0.4rem; font-size:0.88rem; min-height:1.4em;"></div>
+            </div>
+
+            <div class="field">
+              <label>Nombre de personnes <span class="req">*</span></label>
+              <div style="display:flex; align-items:center; gap:0.9rem;">
+                <div class="counter">
+                  <button type="button" id="btn-moins">−</button>
+                  <input type="text" id="nb-display" value="1" readonly>
+                  <input type="hidden" id="nb-personnes" name="nb_personnes" value="1">
+                  <button type="button" id="btn-plus">+</button>
+                </div>
+                <span style="font-size:0.88rem; color:var(--texte-s);">adultes + enfants</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="commentaire">Informations complémentaires</label>
+              <textarea id="commentaire" name="commentaire" placeholder="Ex : 2 adultes, questions…"></textarea>
+            </div>
+
+            <div class="warn-box">
+              ⚠️ <strong>Enfants de moins de 7 ans non admis</strong> — raisons de sécurité liées aux installations hydrauliques du moulin.
+            </div>
+
+            <div class="rgpd-row">
+              <input type="checkbox" id="rgpd" name="rgpd" required>
+              <label for="rgpd">J'accepte que mes coordonnées soient utilisées uniquement pour la gestion de cette inscription, conformément au RGPD. Elles ne seront pas transmises à des tiers.</label>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">Confirmer mon inscription</button>
+
+          </form>
+        </div>
+
+        <div id="success-msg">
+          <div class="s-icon">🎉</div>
+          <h3>Inscription enregistrée !</h3>
+          <p>Merci <strong id="success-name"></strong>, votre inscription est bien prise en compte.<br><br>
+          À très bientôt pour les Journées du Patrimoine à Chaudon !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>
+    Mairie de Chaudon &mdash; 28210 Chaudon &mdash; Eure-et-Loir
+    &nbsp;|&nbsp;
+    <a href="../Administratif.html">Contact &amp; horaires</a>
+  </p>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════
+     GOOGLE APPS SCRIPT — code inchangé, à jour dans Apps Script
+
+     Colonnes Sheet :
+     A: Date inscription  B: Prénom  C: Nom  D: Email  E: Téléphone
+     F: Jour  G: Créneau  H: Nb personnes  I: Commentaire  J: Statut
+
+function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var lastRow = sheet.getLastRow();
+  var places = {};
+  for (var i = 2; i <= lastRow; i++) {
+    var statut = sheet.getRange(i, 10).getValue();
+    if (statut === "Annulé") continue;
+    var jour    = sheet.getRange(i, 6).getValue();
+    var creneau = sheet.getRange(i, 7).getValue();
+    var nb      = parseInt(sheet.getRange(i, 8).getValue()) || 0;
+    var cle = jour + "_" + creneau;
+    places[cle] = (places[cle] || 0) + nb;
+  }
+  return ContentService
+    .createTextOutput(JSON.stringify(places))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var d = JSON.parse(e.postData.contents);
+  var cle = d.jour + "_" + d.creneau;
+  var totalPris = 0;
+  var lastRow = sheet.getLastRow();
+  for (var i = 2; i <= lastRow; i++) {
+    if (sheet.getRange(i, 10).getValue() === "Annulé") continue;
+    if (sheet.getRange(i, 6).getValue() + "_" + sheet.getRange(i, 7).getValue() === cle) {
+      totalPris += parseInt(sheet.getRange(i, 8).getValue()) || 0;
+    }
+  }
+  if (totalPris + parseInt(d.nb_personnes) > 15) {
+    return ContentService.createTextOutput("COMPLET");
+  }
+  sheet.appendRow([
+    d.date_inscription, d.prenom, d.nom, d.email, d.telephone,
+    d.jour, d.creneau, d.nb_personnes, d.commentaire, "À confirmer"
+  ]);
+  var dispo = 15 - totalPris - parseInt(d.nb_personnes);
+  MailApp.sendEmail({
+    to: "ar.croquesel@gmail.com",
+    subject: "⚙️ Réservation Moulin – " + d.prenom + " " + d.nom,
+    body:
+      "Nouvelle réservation !\n\n" +
+      "Nom       : " + d.prenom + " " + d.nom + "\n" +
+      "Email     : " + d.email + "\n" +
+      "Téléphone : " + (d.telephone || "non renseigné") + "\n" +
+      "Jour      : " + d.jour + "\n" +
+      "Créneau   : " + d.creneau + "\n" +
+      "Personnes : " + d.nb_personnes + "\n" +
+      "Commentaire: " + (d.commentaire || "aucun") + "\n\n" +
+      "Places restantes ce créneau : " + dispo + "\n" +
+      "Reçu le   : " + d.date_inscription
+  });
+  return ContentService.createTextOutput("OK");
+}
+════════════════════════════════════════════════════════ -->
+
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmen3XUIh4OQxHNAIRAYiWvfLB4H3JETBJO0aRfc2Cm_E2DBfsEg9QlT4LgHaBmktj/exec";
+const MAX_PLACES = 15;
+
+let placesCache = {};
+let cacheCharge = false;
+
+async function chargerPlaces() {
+  try {
+    const r = await fetch(GOOGLE_SCRIPT_URL + "?action=places");
+    const data = await r.json();
+    placesCache = data;
+    cacheCharge = true;
+    majAffichage();
+  } catch(e) { cacheCharge = true; }
+}
+
+function majAffichage() {
+  const jourEl  = document.querySelector('input[name="jour"]:checked');
+  const creneau = document.getElementById('creneau').value;
+  const div     = document.getElementById('places-info');
+  if (!jourEl || !creneau) { div.textContent = ''; return; }
+  const cle   = jourEl.value + '_' + creneau;
+  const pris  = placesCache[cle] || 0;
+  const dispo = MAX_PLACES - pris;
+  if (dispo <= 0) {
+    div.innerHTML = '<span style="color:#c0392b;font-weight:600;">⛔ Créneau complet</span>';
+  } else if (dispo <= 3) {
+    div.innerHTML = '<span style="color:#e67e22;font-weight:600;">⚠️ Plus que ' + dispo + ' place' + (dispo > 1 ? 's' : '') + ' disponible' + (dispo > 1 ? 's' : '') + '</span>';
+  } else {
+    div.innerHTML = '<span style="color:#27ae60;">✓ ' + dispo + ' places disponibles</span>';
+  }
+}
+
+let nb = 1;
+document.getElementById('btn-moins').addEventListener('click', () => { if (nb > 1)  { nb--; sync(); } });
+document.getElementById('btn-plus').addEventListener('click',  () => { if (nb < MAX_PLACES) { nb++; sync(); } });
+function sync() {
+  document.getElementById('nb-display').value   = nb;
+  document.getElementById('nb-personnes').value = nb;
+}
+
+document.querySelectorAll('input[name="jour"]').forEach(r => r.addEventListener('change', majAffichage));
+document.getElementById('creneau').addEventListener('change', majAffichage);
+
+document.getElementById('inscriptionForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form    = e.target;
+  const btn     = document.getElementById('submitBtn');
+  const prenom  = form.prenom.value.trim();
+  const nom     = form.nom.value.trim();
+  const email   = form.email.value.trim();
+  const jourEl  = form.querySelector('input[name="jour"]:checked');
+  const creneau = form.creneau.value;
+  const rgpd    = form.rgpd.checked;
+
+  if (!prenom || !nom)  { alert("Merci de renseigner votre prénom et nom."); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert("Adresse email invalide."); return; }
+  if (!jourEl)          { alert("Merci de choisir un jour."); return; }
+  if (!creneau)         { alert("Merci de choisir un créneau horaire."); return; }
+  if (!rgpd)            { alert("Merci d'accepter les conditions RGPD."); return; }
+
+  const cle  = jourEl.value + '_' + creneau;
+  const pris = placesCache[cle] || 0;
+  if (cacheCharge && (MAX_PLACES - pris) < nb) {
+    alert("Désolé, il ne reste que " + (MAX_PLACES - pris) + " place(s) sur ce créneau.");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Envoi en cours…';
+
+  const data = {
+    date_inscription: new Date().toLocaleString('fr-FR'),
+    prenom, nom, email,
+    telephone:    form.telephone.value.trim(),
+    jour:         jourEl.value,
+    creneau:      creneau,
+    nb_personnes: nb,
+    commentaire:  form.commentaire.value.trim()
+  };
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    placesCache[cle] = (placesCache[cle] || 0) + nb;
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-name').textContent = prenom + ' ' + nom;
+    document.getElementById('success-msg').style.display = 'block';
+  } catch(err) {
+    btn.disabled = false;
+    btn.innerHTML = 'Confirmer ma réservation';
+    alert("Erreur lors de l'envoi. Merci de réessayer ou de contacter la mairie.");
+  }
+});
+
+chargerPlaces();
+</script>
+
+<script>
+(function() {
+  var jours = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+  var mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+
+  function updateHeaderDate() {
+    var d = new Date();
+    var hdr = document.getElementById("hdr-date");
+    if (hdr) {
+      hdr.innerHTML = jours[d.getDay()].charAt(0).toUpperCase() + jours[d.getDay()].slice(1)
+        + " " + d.getDate() + " " + mois[d.getMonth()] + "<br>" + d.getFullYear();
+    }
+  }
+  updateHeaderDate();
+
+  // ── Hamburger ──
+  var btn = document.getElementById("ham-btn");
+  var menu = document.getElementById("nav-menu");
+  if (btn && menu) {
+    btn.addEventListener("click", function() {
+      var open = menu.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open);
+    });
+  }
+
+  // ── Mobile sous-menus ──
+  document.querySelectorAll(".nav-menu > li > a, .dropdown > li > a").forEach(function(a) {
+    if (a.nextElementSibling && (a.nextElementSibling.classList.contains("dropdown") || a.nextElementSibling.classList.contains("sub-dropdown"))) {
+      a.addEventListener("click", function(e) {
+        if (window.innerWidth <= 900) {
+          e.preventDefault();
+          var li = a.parentElement;
+          li.classList.toggle("mob-open");
+        }
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>
